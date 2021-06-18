@@ -1,19 +1,24 @@
 package main
 
 import (
-	pb "../pb"
 	"context"
 	"log"
+	"net"
 	"time"
+
+	pb "github.com/OhMimi/testgrpc/pb"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 type EchoServer struct{}
 
 func (e *EchoServer) Echo(ctx context.Context, req *pb.EchoRequest) (resp *pb.EchoReply, err error) {
 
-	log.Printf("receive client request, client send:%s\n", req.Msg)
+	log.Printf("receive client request, client send:%s\n", req.Message)
 	return &pb.EchoReply{
-		Msg:      req.Msg,
+		Message:  req.Message,
 		Unixtime: time.Now().Unix(),
 	}, nil
 
@@ -31,7 +36,7 @@ func main() {
 
 	grpc := grpc.NewServer()
 
-	pb.RegisterEchoServer(grpc, es)
+	pb.RegisterEchoServerServer(grpc, es)
 
 	reflection.Register(grpc)
 	if err := grpc.Serve(apiListener); err != nil {
