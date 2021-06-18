@@ -1,17 +1,21 @@
 syntax = "proto3";  // 定義要使用的 protocol buffer 版本
 
-package calculator;  // for name space
-option go_package = "proto/calculator";  // generated code 的 full Go import path
+package example;  // for name space
+option go_package = "/";  // generated code 的 full Go import path
 
-message CalculatorRequest {
-  int64 a = 1;
-  int64 b = 2;
+//定義了一個 EchoServer
+service EchoServer {
+  rpc Echo (EchoRequest) returns(EchoReply){}
 }
 
-message CalculatorResponse {
-  int64 result = 1;
+//定義了 Echo Server EchoRequest
+message EchoRequest {
+  string message = 1;
 }
 
-service CalculatorService {
-  rpc Sum(CalculatorRequest) returns (CalculatorResponse) {};
+//定義了 Echo Response
+//這裡多回傳了一個 叫做 unixtime
+message EchoReply {
+  string message = 1;
+  int64 unixtime = 2;
 }

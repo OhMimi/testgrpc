@@ -4,7 +4,7 @@
 // 	protoc        v3.17.3
 // source: example.proto
 
-package calculator
+package __
 
 import (
 	context "context"
@@ -24,17 +24,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CalculatorRequest struct {
+//定義了 Echo Server EchoRequest
+type EchoRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	A int64 `protobuf:"varint,1,opt,name=a,proto3" json:"a,omitempty"`
-	B int64 `protobuf:"varint,2,opt,name=b,proto3" json:"b,omitempty"`
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 }
 
-func (x *CalculatorRequest) Reset() {
-	*x = CalculatorRequest{}
+func (x *EchoRequest) Reset() {
+	*x = EchoRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_example_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -42,13 +42,13 @@ func (x *CalculatorRequest) Reset() {
 	}
 }
 
-func (x *CalculatorRequest) String() string {
+func (x *EchoRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CalculatorRequest) ProtoMessage() {}
+func (*EchoRequest) ProtoMessage() {}
 
-func (x *CalculatorRequest) ProtoReflect() protoreflect.Message {
+func (x *EchoRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_example_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -60,35 +60,31 @@ func (x *CalculatorRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CalculatorRequest.ProtoReflect.Descriptor instead.
-func (*CalculatorRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use EchoRequest.ProtoReflect.Descriptor instead.
+func (*EchoRequest) Descriptor() ([]byte, []int) {
 	return file_example_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CalculatorRequest) GetA() int64 {
+func (x *EchoRequest) GetMessage() string {
 	if x != nil {
-		return x.A
+		return x.Message
 	}
-	return 0
+	return ""
 }
 
-func (x *CalculatorRequest) GetB() int64 {
-	if x != nil {
-		return x.B
-	}
-	return 0
-}
-
-type CalculatorResponse struct {
+//定義了 Echo Response
+//這裡多回傳了一個 叫做 unixtime
+type EchoReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Result int64 `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Message  string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Unixtime int64  `protobuf:"varint,2,opt,name=unixtime,proto3" json:"unixtime,omitempty"`
 }
 
-func (x *CalculatorResponse) Reset() {
-	*x = CalculatorResponse{}
+func (x *EchoReply) Reset() {
+	*x = EchoReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_example_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -96,13 +92,13 @@ func (x *CalculatorResponse) Reset() {
 	}
 }
 
-func (x *CalculatorResponse) String() string {
+func (x *EchoReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CalculatorResponse) ProtoMessage() {}
+func (*EchoReply) ProtoMessage() {}
 
-func (x *CalculatorResponse) ProtoReflect() protoreflect.Message {
+func (x *EchoReply) ProtoReflect() protoreflect.Message {
 	mi := &file_example_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -114,14 +110,21 @@ func (x *CalculatorResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CalculatorResponse.ProtoReflect.Descriptor instead.
-func (*CalculatorResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use EchoReply.ProtoReflect.Descriptor instead.
+func (*EchoReply) Descriptor() ([]byte, []int) {
 	return file_example_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CalculatorResponse) GetResult() int64 {
+func (x *EchoReply) GetMessage() string {
 	if x != nil {
-		return x.Result
+		return x.Message
+	}
+	return ""
+}
+
+func (x *EchoReply) GetUnixtime() int64 {
+	if x != nil {
+		return x.Unixtime
 	}
 	return 0
 }
@@ -130,20 +133,18 @@ var File_example_proto protoreflect.FileDescriptor
 
 var file_example_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
-	0x0a, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x2f, 0x0a, 0x11, 0x43,
-	0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x12, 0x0c, 0x0a, 0x01, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x61, 0x12, 0x0c,
-	0x0a, 0x01, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x01, 0x62, 0x22, 0x2c, 0x0a, 0x12,
-	0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x32, 0x5b, 0x0a, 0x11, 0x43, 0x61,
-	0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
-	0x46, 0x0a, 0x03, 0x53, 0x75, 0x6d, 0x12, 0x1d, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61,
-	0x74, 0x6f, 0x72, 0x2e, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74,
-	0x6f, 0x72, 0x2e, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x12, 0x5a, 0x10, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x07, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x22, 0x27, 0x0a, 0x0b, 0x45, 0x63, 0x68, 0x6f,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x22, 0x41, 0x0a, 0x09, 0x45, 0x63, 0x68, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x18,
+	0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x6e, 0x69, 0x78,
+	0x74, 0x69, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x75, 0x6e, 0x69, 0x78,
+	0x74, 0x69, 0x6d, 0x65, 0x32, 0x40, 0x0a, 0x0a, 0x45, 0x63, 0x68, 0x6f, 0x53, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x12, 0x32, 0x0a, 0x04, 0x45, 0x63, 0x68, 0x6f, 0x12, 0x14, 0x2e, 0x65, 0x78, 0x61,
+	0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x12, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x03, 0x5a, 0x01, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x33,
 }
 
@@ -161,12 +162,12 @@ func file_example_proto_rawDescGZIP() []byte {
 
 var file_example_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_example_proto_goTypes = []interface{}{
-	(*CalculatorRequest)(nil),  // 0: calculator.CalculatorRequest
-	(*CalculatorResponse)(nil), // 1: calculator.CalculatorResponse
+	(*EchoRequest)(nil), // 0: example.EchoRequest
+	(*EchoReply)(nil),   // 1: example.EchoReply
 }
 var file_example_proto_depIdxs = []int32{
-	0, // 0: calculator.CalculatorService.Sum:input_type -> calculator.CalculatorRequest
-	1, // 1: calculator.CalculatorService.Sum:output_type -> calculator.CalculatorResponse
+	0, // 0: example.EchoServer.Echo:input_type -> example.EchoRequest
+	1, // 1: example.EchoServer.Echo:output_type -> example.EchoReply
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -181,7 +182,7 @@ func file_example_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_example_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CalculatorRequest); i {
+			switch v := v.(*EchoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -193,7 +194,7 @@ func file_example_proto_init() {
 			}
 		}
 		file_example_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CalculatorResponse); i {
+			switch v := v.(*EchoReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -233,72 +234,72 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// CalculatorServiceClient is the client API for CalculatorService service.
+// EchoServerClient is the client API for EchoServer service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type CalculatorServiceClient interface {
-	Sum(ctx context.Context, in *CalculatorRequest, opts ...grpc.CallOption) (*CalculatorResponse, error)
+type EchoServerClient interface {
+	Echo(ctx context.Context, in *EchoRequest, opts ...grpc.CallOption) (*EchoReply, error)
 }
 
-type calculatorServiceClient struct {
+type echoServerClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCalculatorServiceClient(cc grpc.ClientConnInterface) CalculatorServiceClient {
-	return &calculatorServiceClient{cc}
+func NewEchoServerClient(cc grpc.ClientConnInterface) EchoServerClient {
+	return &echoServerClient{cc}
 }
 
-func (c *calculatorServiceClient) Sum(ctx context.Context, in *CalculatorRequest, opts ...grpc.CallOption) (*CalculatorResponse, error) {
-	out := new(CalculatorResponse)
-	err := c.cc.Invoke(ctx, "/calculator.CalculatorService/Sum", in, out, opts...)
+func (c *echoServerClient) Echo(ctx context.Context, in *EchoRequest, opts ...grpc.CallOption) (*EchoReply, error) {
+	out := new(EchoReply)
+	err := c.cc.Invoke(ctx, "/example.EchoServer/Echo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CalculatorServiceServer is the server API for CalculatorService service.
-type CalculatorServiceServer interface {
-	Sum(context.Context, *CalculatorRequest) (*CalculatorResponse, error)
+// EchoServerServer is the server API for EchoServer service.
+type EchoServerServer interface {
+	Echo(context.Context, *EchoRequest) (*EchoReply, error)
 }
 
-// UnimplementedCalculatorServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedCalculatorServiceServer struct {
+// UnimplementedEchoServerServer can be embedded to have forward compatible implementations.
+type UnimplementedEchoServerServer struct {
 }
 
-func (*UnimplementedCalculatorServiceServer) Sum(context.Context, *CalculatorRequest) (*CalculatorResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Sum not implemented")
+func (*UnimplementedEchoServerServer) Echo(context.Context, *EchoRequest) (*EchoReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Echo not implemented")
 }
 
-func RegisterCalculatorServiceServer(s *grpc.Server, srv CalculatorServiceServer) {
-	s.RegisterService(&_CalculatorService_serviceDesc, srv)
+func RegisterEchoServerServer(s *grpc.Server, srv EchoServerServer) {
+	s.RegisterService(&_EchoServer_serviceDesc, srv)
 }
 
-func _CalculatorService_Sum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CalculatorRequest)
+func _EchoServer_Echo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EchoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CalculatorServiceServer).Sum(ctx, in)
+		return srv.(EchoServerServer).Echo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/calculator.CalculatorService/Sum",
+		FullMethod: "/example.EchoServer/Echo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CalculatorServiceServer).Sum(ctx, req.(*CalculatorRequest))
+		return srv.(EchoServerServer).Echo(ctx, req.(*EchoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _CalculatorService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "calculator.CalculatorService",
-	HandlerType: (*CalculatorServiceServer)(nil),
+var _EchoServer_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "example.EchoServer",
+	HandlerType: (*EchoServerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Sum",
-			Handler:    _CalculatorService_Sum_Handler,
+			MethodName: "Echo",
+			Handler:    _EchoServer_Echo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
