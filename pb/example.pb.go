@@ -129,6 +129,141 @@ func (x *EchoReply) GetUnixtime() int64 {
 	return 0
 }
 
+//定義了 Echo Server EchoRequest
+type CallRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *CallRequest) Reset() {
+	*x = CallRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_example_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CallRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallRequest) ProtoMessage() {}
+
+func (x *CallRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_example_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallRequest.ProtoReflect.Descriptor instead.
+func (*CallRequest) Descriptor() ([]byte, []int) {
+	return file_example_proto_rawDescGZIP(), []int{2}
+}
+
+//定義了 Echo Response
+//這裡多回傳了一個 叫做 unixtime
+type CallReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Values []*CallReply_Edge `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
+}
+
+func (x *CallReply) Reset() {
+	*x = CallReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_example_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CallReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallReply) ProtoMessage() {}
+
+func (x *CallReply) ProtoReflect() protoreflect.Message {
+	mi := &file_example_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallReply.ProtoReflect.Descriptor instead.
+func (*CallReply) Descriptor() ([]byte, []int) {
+	return file_example_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CallReply) GetValues() []*CallReply_Edge {
+	if x != nil {
+		return x.Values
+	}
+	return nil
+}
+
+type CallReply_Edge struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Edges []int32 `protobuf:"varint,1,rep,packed,name=edges,proto3" json:"edges,omitempty"`
+}
+
+func (x *CallReply_Edge) Reset() {
+	*x = CallReply_Edge{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_example_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CallReply_Edge) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CallReply_Edge) ProtoMessage() {}
+
+func (x *CallReply_Edge) ProtoReflect() protoreflect.Message {
+	mi := &file_example_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CallReply_Edge.ProtoReflect.Descriptor instead.
+func (*CallReply_Edge) Descriptor() ([]byte, []int) {
+	return file_example_proto_rawDescGZIP(), []int{3, 0}
+}
+
+func (x *CallReply_Edge) GetEdges() []int32 {
+	if x != nil {
+		return x.Edges
+	}
+	return nil
+}
+
 var File_example_proto protoreflect.FileDescriptor
 
 var file_example_proto_rawDesc = []byte{
@@ -140,12 +275,22 @@ var file_example_proto_rawDesc = []byte{
 	0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x6e, 0x69, 0x78,
 	0x74, 0x69, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x75, 0x6e, 0x69, 0x78,
-	0x74, 0x69, 0x6d, 0x65, 0x32, 0x40, 0x0a, 0x0a, 0x45, 0x63, 0x68, 0x6f, 0x53, 0x65, 0x72, 0x76,
-	0x65, 0x72, 0x12, 0x32, 0x0a, 0x04, 0x45, 0x63, 0x68, 0x6f, 0x12, 0x14, 0x2e, 0x65, 0x78, 0x61,
-	0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x12, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x52,
-	0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x03, 0x5a, 0x01, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x74, 0x69, 0x6d, 0x65, 0x22, 0x0d, 0x0a, 0x0b, 0x43, 0x61, 0x6c, 0x6c, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x22, 0x5a, 0x0a, 0x09, 0x43, 0x61, 0x6c, 0x6c, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x2f, 0x0a, 0x06, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x17, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x43, 0x61, 0x6c, 0x6c, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x2e, 0x45, 0x64, 0x67, 0x65, 0x52, 0x06, 0x76, 0x61, 0x6c, 0x75, 0x65,
+	0x73, 0x1a, 0x1c, 0x0a, 0x04, 0x45, 0x64, 0x67, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x64, 0x67,
+	0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x05, 0x52, 0x05, 0x65, 0x64, 0x67, 0x65, 0x73, 0x32,
+	0x74, 0x0a, 0x0a, 0x45, 0x63, 0x68, 0x6f, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x12, 0x32, 0x0a,
+	0x04, 0x45, 0x63, 0x68, 0x6f, 0x12, 0x14, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e,
+	0x45, 0x63, 0x68, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x65, 0x78,
+	0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x45, 0x63, 0x68, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
+	0x00, 0x12, 0x32, 0x0a, 0x04, 0x43, 0x61, 0x6c, 0x6c, 0x12, 0x14, 0x2e, 0x65, 0x78, 0x61, 0x6d,
+	0x70, 0x6c, 0x65, 0x2e, 0x43, 0x61, 0x6c, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x12, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x43, 0x61, 0x6c, 0x6c, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x03, 0x5a, 0x01, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -160,19 +305,25 @@ func file_example_proto_rawDescGZIP() []byte {
 	return file_example_proto_rawDescData
 }
 
-var file_example_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_example_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_example_proto_goTypes = []interface{}{
-	(*EchoRequest)(nil), // 0: example.EchoRequest
-	(*EchoReply)(nil),   // 1: example.EchoReply
+	(*EchoRequest)(nil),    // 0: example.EchoRequest
+	(*EchoReply)(nil),      // 1: example.EchoReply
+	(*CallRequest)(nil),    // 2: example.CallRequest
+	(*CallReply)(nil),      // 3: example.CallReply
+	(*CallReply_Edge)(nil), // 4: example.CallReply.Edge
 }
 var file_example_proto_depIdxs = []int32{
-	0, // 0: example.EchoServer.Echo:input_type -> example.EchoRequest
-	1, // 1: example.EchoServer.Echo:output_type -> example.EchoReply
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: example.CallReply.values:type_name -> example.CallReply.Edge
+	0, // 1: example.EchoServer.Echo:input_type -> example.EchoRequest
+	2, // 2: example.EchoServer.Call:input_type -> example.CallRequest
+	1, // 3: example.EchoServer.Echo:output_type -> example.EchoReply
+	3, // 4: example.EchoServer.Call:output_type -> example.CallReply
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_example_proto_init() }
@@ -205,6 +356,42 @@ func file_example_proto_init() {
 				return nil
 			}
 		}
+		file_example_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CallRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_example_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CallReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_example_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CallReply_Edge); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -212,7 +399,7 @@ func file_example_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_example_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -239,6 +426,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type EchoServerClient interface {
 	Echo(ctx context.Context, in *EchoRequest, opts ...grpc.CallOption) (*EchoReply, error)
+	Call(ctx context.Context, in *CallRequest, opts ...grpc.CallOption) (*CallReply, error)
 }
 
 type echoServerClient struct {
@@ -258,9 +446,19 @@ func (c *echoServerClient) Echo(ctx context.Context, in *EchoRequest, opts ...gr
 	return out, nil
 }
 
+func (c *echoServerClient) Call(ctx context.Context, in *CallRequest, opts ...grpc.CallOption) (*CallReply, error) {
+	out := new(CallReply)
+	err := c.cc.Invoke(ctx, "/example.EchoServer/Call", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EchoServerServer is the server API for EchoServer service.
 type EchoServerServer interface {
 	Echo(context.Context, *EchoRequest) (*EchoReply, error)
+	Call(context.Context, *CallRequest) (*CallReply, error)
 }
 
 // UnimplementedEchoServerServer can be embedded to have forward compatible implementations.
@@ -269,6 +467,9 @@ type UnimplementedEchoServerServer struct {
 
 func (*UnimplementedEchoServerServer) Echo(context.Context, *EchoRequest) (*EchoReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Echo not implemented")
+}
+func (*UnimplementedEchoServerServer) Call(context.Context, *CallRequest) (*CallReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Call not implemented")
 }
 
 func RegisterEchoServerServer(s *grpc.Server, srv EchoServerServer) {
@@ -293,6 +494,24 @@ func _EchoServer_Echo_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EchoServer_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EchoServerServer).Call(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/example.EchoServer/Call",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EchoServerServer).Call(ctx, req.(*CallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _EchoServer_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "example.EchoServer",
 	HandlerType: (*EchoServerServer)(nil),
@@ -300,6 +519,10 @@ var _EchoServer_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Echo",
 			Handler:    _EchoServer_Echo_Handler,
+		},
+		{
+			MethodName: "Call",
+			Handler:    _EchoServer_Call_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

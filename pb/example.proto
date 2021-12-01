@@ -6,6 +6,7 @@ option go_package = "/";  // generated code 的 full Go import path
 //定義了一個 EchoServer
 service EchoServer {
   rpc Echo (EchoRequest) returns(EchoReply){}
+  rpc Call (CallRequest) returns(CallReply){}
 }
 
 //定義了 Echo Server EchoRequest
@@ -18,4 +19,16 @@ message EchoRequest {
 message EchoReply {
   string message = 1;
   int64 unixtime = 2;
+}
+
+//定義了 Echo Server EchoRequest
+message CallRequest {}
+
+//定義了 Echo Response
+//這裡多回傳了一個 叫做 unixtime
+message CallReply {
+  message Edge {
+    repeated int32 edges = 1;
+  }
+  repeated Edge values = 1;
 }
