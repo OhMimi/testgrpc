@@ -27,7 +27,7 @@ func (e *EchoServer) Echo(ctx context.Context, req *pb.EchoRequest) (resp *pb.Ec
 
 }
 
-func (e *EchoServer) Call(ctx context.Context, req *pb.CallRequest) (resp *pb.EchoReply, err error) {
+func (e *EchoServer) Call(ctx context.Context, req *pb.CallRequest) (resp *pb.CallReply, err error) {
 
 	log.Printf("receive client request, client send:%s\n", req.Message)
 	log.Printf("receive bet:%d, gametype:%s\n", gjson.Get(req.Message, "bet").Int(), gjson.Get(req.Message, "game_type").String())
